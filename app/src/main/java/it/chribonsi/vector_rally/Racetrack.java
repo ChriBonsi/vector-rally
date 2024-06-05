@@ -26,6 +26,7 @@ public interface Racetrack {
     //TODO
     /**
      * Returns the neighbours of a cell.
+     *
      * @param position the coordinates of the cell
      */
     void getNeighbours(Position position);
