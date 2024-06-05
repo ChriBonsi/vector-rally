@@ -23,32 +23,48 @@ public interface Racetrack {
      */
     MoveResult movePlayer(Player player);
 
-    void getNeighbours(int x, int y);
+    //TODO
+    /**
+     * Returns the neighbours of a cell.
+     * @param position the coordinates of the cell
+     */
+    void getNeighbours(Position position);
 
     /**
      * Returns the cell in the racetrack.
      *
-     * @param x the x coordinate of the cell
-     * @param y the y coordinate of the cell
+     * @param position the coordinates of the cell
      * @return the cell
      */
-    Cell getCell(int x, int y);
+    CellType getCell(Position position);
 
     /**
      * Returns the type of cell in the racetrack.
      *
-     * @param x the x coordinate of the cell
-     * @param y the y coordinate of the cell
+     * @param position the coordinates of the cell
      * @return the state of the cell
      */
-    CellType getCellType(int x, int y);
+    CellType getCellType(Position position);
 
     /**
      * Returns the player in a cell.
      *
-     * @param x the x coordinate of the cell
-     * @param y the y coordinate of the cell
+     * @param position the coordinates of the cell
      * @return the player in the cell
      */
-    Optional<Player> getPlayer(int x, int y);
+    Optional<Player> getPlayer(Position position);
+
+    /**
+     * Calculates the height of the racetrack.
+     *
+     * @return the height
+     */
+    int calculateHeight();
+
+    /**
+     * Calculates the width of the racetrack.
+     *
+     * @return the width
+     */
+    int calculateWidth();
 }
