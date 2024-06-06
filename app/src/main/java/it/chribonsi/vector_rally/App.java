@@ -3,12 +3,18 @@
  */
 package it.chribonsi.vector_rally;
 
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Hello and welcome to Vector Rally!\nLet's set the game values:");
+        System.out.println("=======================================");
+        //start the game prompt to set values
 
-    public String getGreeting() {
-        return "Hello World!";
+        System.out.println("\nDo you want to use a default map? [yes/no]");
+        String answer = scanner.nextLine();
+        System.out.println("\nPlease enter the number of players (2-4):");
+        int numPlayers = scanner.nextInt();
     }
 }
