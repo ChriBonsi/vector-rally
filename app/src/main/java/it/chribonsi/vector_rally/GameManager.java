@@ -5,6 +5,11 @@ package it.chribonsi.vector_rally;
  */
 public interface GameManager {
 
+    /**
+     * Starts the selection process and then the race.
+     */
+    public void startGame();
+
     //TODO: probably just a step instead of a method
     /**
      * Selects the number of players for the game.
@@ -46,17 +51,17 @@ public interface GameManager {
     String getDefaultSchematicPath(String schematicName);
 
     /**
-     * Starts a game with the given players.
+     * Starts a race with the given players and racetrack.
      *
-     * @param players the players to start the game with
-     * @return true if the game was started, false otherwise
+     * @param players the players to start the race with
+     * @return true if the race was started, false otherwise
      */
-    boolean startGame(Player[] players);
+    boolean startRace(Player[] players);
 
     /**
      * Stops the game.
      *
      * @return true if the game was stopped, false otherwise
      */
-    boolean endGame();
+    boolean stopRace();
 }

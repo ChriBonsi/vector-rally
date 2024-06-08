@@ -3,18 +3,15 @@
  */
 package it.chribonsi.vector_rally;
 
-import java.util.Scanner;
-
 public class App {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        IOManager ioManager = new IOManager();
         System.out.println("Hello and welcome to Vector Rally!\nLet's set the game values:");
         System.out.println("=======================================");
         //start the game prompt to set values
-
-        System.out.println("\nDo you want to use a default map? [yes/no]");
-        String answer = scanner.nextLine();
-        System.out.println("\nPlease enter the number of players (2-4):");
-        int numPlayers = scanner.nextInt();
+        //TODO: creo nuovo game manager e chiamo start game, dentro il quale c'è la selezione dei valori
+        // quindi eliminare questo che è solo per prova
+        String a = ioManager.selectMap();
+        System.out.println("app: "+a);
     }
 }
