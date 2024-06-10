@@ -8,12 +8,11 @@ import java.io.File;
 public interface Schematic {
 
     /**
-     * Receives the schematic of the racetrack in input.
+     * Checks the validity of the schematic.
      *
-     * @param path the path of where the schematic is stored
-     * @return the schematic as an Image
+     * @return true if the schematic is valid, false otherwise
      */
-    File getSchematic(String path);
+    boolean checkValidity();
 
     /**
      * Transforms the schematic into a grid of CellType.

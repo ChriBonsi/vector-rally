@@ -8,15 +8,7 @@ public interface GameManager {
     /**
      * Starts the selection process and then the race.
      */
-    public void startGame();
-
-    //TODO: probably just a step instead of a method
-    /**
-     * Selects the number of players for the game.
-     *
-     * @return the number of players selected
-     */
-    int selectPlayersNumber(int number);
+    //public void startGame();
 
     /**
      * Selects the players for the game.
@@ -24,7 +16,7 @@ public interface GameManager {
      * @param number the number of players to select for the game
      * @return the selected players
      */
-    Player[] selectPlayers(int number);
+    //Player[] selectPlayers(int number);
 
     /**
      * Selects the racetrack for the game.
@@ -32,7 +24,7 @@ public interface GameManager {
      * @param schematic the schematic of the racetrack
      * @return the selected racetrack
      */
-    Racetrack selectRacetrack(Schematic schematic);
+    //Racetrack selectRacetrack(Schematic schematic);
 
     /**
      * Submits a racetrack schematic to the game manager.
@@ -40,7 +32,7 @@ public interface GameManager {
      * @param path the path of the schematic to submit
      * @return the submitted schematic
      */
-    Schematic submitSchematic(String path);
+    //Schematic submitSchematic(String path);
 
     /**
      * Gets the default schematic path for the given schematic name.
@@ -48,15 +40,14 @@ public interface GameManager {
      * @param schematicName the name of the schematic
      * @return the default schematic path
      */
-    String getDefaultSchematicPath(String schematicName);
+    //String getDefaultSchematicPath(String schematicName);
 
     /**
      * Starts a race with the given players and racetrack.
      *
-     * @param players the players to start the race with
      * @return true if the race was started, false otherwise
      */
-    boolean startRace(Player[] players);
+    boolean startRace();
 
     /**
      * Stops the game.

@@ -23,6 +23,11 @@ dependencies {
     implementation libs.guava
 }
 
+tasks.named('processResources') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+
 sourceSets {
     main {
         java {
