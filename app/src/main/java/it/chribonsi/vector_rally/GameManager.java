@@ -55,4 +55,13 @@ public interface GameManager {
      * @return true if the game was stopped, false otherwise
      */
     boolean stopRace();
+
+    /**
+     * Generates the players for the game.
+     *
+     * @param totalPlayers the number of players to generate
+     * @param humanPlayers the number of human players to generate
+     * @return the generated players
+     */
+    Player[] generatePlayers(int totalPlayers, int humanPlayers);
 }

@@ -7,22 +7,7 @@ public class App {
     public static void main(String[] args) {
         //real flow
         System.out.println("starting game...");
-        SimpleGameManager gameManager = new SimpleGameManager(new IOManager());
+        SimpleGameManager gameManager = new SimpleGameManager();
         gameManager.startRace();
-
-
-
-        //test flow
-//        IOManager ioManager = new IOManager();
-//        System.out.println("Hello and welcome to Vector Rally!\nLet's set the game values:");
-//        System.out.println("=======================================");
-//        //start the game prompt to set values
-//        //TODO: creo nuovo game manager e chiamo start game, dentro il quale c'è la selezione dei valori
-//        // quindi eliminare questo che è solo per prova
-//
-//
-//
-//        String a = ioManager.selectMapPath();
-//        System.out.println("app: "+a);
     }
 }

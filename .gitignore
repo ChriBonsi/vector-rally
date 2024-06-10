@@ -301,3 +301,4 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
+app/src/main/java/it/chribonsi/vector_rally/MainTest.java

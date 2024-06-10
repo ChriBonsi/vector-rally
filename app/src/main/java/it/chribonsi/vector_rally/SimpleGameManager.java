@@ -1,27 +1,22 @@
 package it.chribonsi.vector_rally;
 
-public class SimpleGameManager implements GameManager{
+public class SimpleGameManager implements GameManager {
     private final int playersNumber;
     private final Player[] players;
     private final Racetrack racetrack;
 
-    public SimpleGameManager(int playersNumber, Player[] players, Racetrack racetrack) {
-        this.playersNumber = playersNumber;
-        this.players = players;
-        this.racetrack = racetrack;
+    public SimpleGameManager() {
+        this.playersNumber = 0;
+        this.players = null;
+        this.racetrack = null;
     }
 
-    public SimpleGameManager(IOManager ioManager) {
-        System.out.println("asking players number");
-        this.playersNumber = ioManager.selectPlayersNumber();
-
-        System.out.println("asking players");
-        this.players = ioManager.selectPlayers(this.playersNumber);
-
-        System.out.println("asking track");
-        TxtSchematic schematic = new TxtSchematic(ioManager.selectMapPath());
-        this.racetrack = schematic.getTrack();
-    }
+//    public SimpleGameManager(IOManager ioManager) {
+//        this.playersNumber = ioManager.selectPlayersNumber();
+//        this.players = this.generatePlayers(this.playersNumber, ioManager.selectHumanPlayers(this.playersNumber));
+//        TxtSchematic schematic = new TxtSchematic(ioManager.selectMapPath());
+//        this.racetrack = schematic.getTrack();
+//    }
 
     @Override
     public boolean startRace() {
@@ -32,5 +27,17 @@ public class SimpleGameManager implements GameManager{
     @Override
     public boolean stopRace() {
         return false;
+    }
+
+    @Override
+    public Player[] generatePlayers(int totalPlayers, int humanPlayers) {
+        Player[] players = new Player[totalPlayers];
+        for (int i = 0; i < humanPlayers; i++) {
+            players[i] = new HumanPlayer();
+        }
+        for (int i = humanPlayers; i < totalPlayers; i++) {
+            players[i] = new BotPlayer();
+        }
+        return players;
     }
 }
