@@ -1,6 +1,7 @@
 package it.chribonsi.vector_rally;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Describes the structure of the drawing of a racetrack that can be transformed into one.
@@ -29,4 +30,10 @@ public interface Schematic {
      * @return a racetrack
      */
     Racetrack deriveTrack(CellType[][] grid);
+
+    /**
+     * Returns the players in the schematic.
+     * @return the list of players
+     */
+    List<Player> getPlayers();
 }

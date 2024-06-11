@@ -1,22 +1,25 @@
 package it.chribonsi.vector_rally;
 
+import java.nio.file.Path;
+import java.util.List;
+
 public class SimpleGameManager implements GameManager {
     private final int playersNumber;
-    private final Player[] players;
+    private final Path mapPath;
+    private final TxtSchematic gameSchema;
+    private final List<Player> players;
     private final Racetrack racetrack;
+    private final IOManager ioManager;
 
     public SimpleGameManager() {
-        this.playersNumber = 0;
-        this.players = null;
-        this.racetrack = null;
-    }
+        this.ioManager = new IOManager();
+        this.mapPath = this.ioManager.selectMapPath();
+        this.gameSchema = new TxtSchematic(this.mapPath);
 
-//    public SimpleGameManager(IOManager ioManager) {
-//        this.playersNumber = ioManager.selectPlayersNumber();
-//        this.players = this.generatePlayers(this.playersNumber, ioManager.selectHumanPlayers(this.playersNumber));
-//        TxtSchematic schematic = new TxtSchematic(ioManager.selectMapPath());
-//        this.racetrack = schematic.getTrack();
-//    }
+        this.playersNumber = this.gameSchema.getPlayers().size();
+        this.players = this.gameSchema.getPlayers();
+        this.racetrack = this.gameSchema.getTrack();
+    }
 
     @Override
     public boolean startRace() {

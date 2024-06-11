@@ -1,19 +1,18 @@
 package it.chribonsi.vector_rally;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.util.List;
 
 public class TxtSchematic implements Schematic {
-    private final String txtSchematicPath;
+    private final Path txtSchematicPath;
     private final CellType[][] grid;
     private final Racetrack track;
 
-    public TxtSchematic(String txtSchematicPath) {
+    public TxtSchematic(Path txtSchematicPath) {
         this.txtSchematicPath = txtSchematicPath;
-        if (!this.checkValidity()) throw new IllegalArgumentException("Invalid schematic file.");
-        else {
-            this.grid = this.deriveGrid(new File(txtSchematicPath));
-            this.track = this.deriveTrack(this.grid);
-        }
+        this.grid = deriveGrid(txtSchematicPath.toFile());
+        this.track = deriveTrack(grid);
     }
 
     @Override
@@ -31,7 +30,12 @@ public class TxtSchematic implements Schematic {
         return null;
     }
 
-    public String getTxtSchematicPath() {
+    @Override
+    public List<Player> getPlayers() {
+        return List.of();
+    }
+
+    public Path getTxtSchematicPath() {
         return txtSchematicPath;
     }
 
