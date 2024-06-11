@@ -13,13 +13,13 @@ public class IOManager {
      *
      * @return the path of the selected map
      */
-    public Path selectMapPath() {
+    public Path selectSchemaFilePath() {
         Path path = null;
-        while (path == null || !Files.exists(path)) {
-            System.out.println("Please enter the path of the map file (It should be a .txt file):");
+        while (path == null || !path.toString().endsWith(".json") || !Files.exists(path)) {
+            System.out.println("Please enter the path of the schema file (It should be a .json file):");
             path = Paths.get(scanner.nextLine());
             if (!Files.exists(path)) {
-                System.out.println("Invalid path. Please enter a valid path ending with '.txt'.");
+                System.out.println("Invalid path. Please enter a valid path ending with '.json'.");
             }
         }
         return path;

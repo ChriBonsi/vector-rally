@@ -4,12 +4,12 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 
-public class TxtSchematic implements Schematic {
+public class JSONSchematic implements Schematic {
     private final Path txtSchematicPath;
     private final CellType[][] grid;
     private final Racetrack track;
 
-    public TxtSchematic(Path txtSchematicPath) {
+    public JSONSchematic(Path txtSchematicPath) {
         this.txtSchematicPath = txtSchematicPath;
         this.grid = deriveGrid(txtSchematicPath.toFile());
         this.track = deriveTrack(grid);
