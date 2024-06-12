@@ -35,7 +35,7 @@ public class JSONSchematic implements Schematic {
 
     @Override
     public Racetrack deriveTrack() {
-        if (this.grid == null){
+        if (this.grid == null) {
             return null;
         }
         return null;

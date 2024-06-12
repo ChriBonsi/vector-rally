@@ -1,6 +1,6 @@
 package it.chribonsi.vector_rally;
 
-public class BotPlayer implements Player{
+public class BotPlayer implements Player {
     private final String name;
 
     public BotPlayer(String name) {
