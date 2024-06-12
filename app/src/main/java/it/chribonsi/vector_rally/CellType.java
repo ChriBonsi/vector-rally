@@ -10,5 +10,15 @@ package it.chribonsi.vector_rally;
  * OUTSIDE: the cells outside the racetrack
  */
 public enum CellType {
-    START, FINISH, ROAD, BORDER, OBSTACLE, OUTSIDE
+    START, FINISH, ROAD, BORDER, OUTSIDE;
+
+    public static CellType fromChar(char c) {
+        return switch (c) {
+            case '-' -> ROAD;
+            case '@' -> OUTSIDE;
+            case '/' -> BORDER;
+            case '~' -> START;
+            default -> throw new IllegalArgumentException("Unknown cell type: " + c);
+        };
+    }
 }

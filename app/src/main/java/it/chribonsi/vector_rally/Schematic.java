@@ -3,7 +3,7 @@ package it.chribonsi.vector_rally;
 import java.util.List;
 
 /**
- * Describes the structure of the drawing of a racetrack that can be transformed into one.
+ * Parses the file of the structure of a racetrack with its players and returns it.
  */
 public interface Schematic {
 
@@ -13,6 +13,11 @@ public interface Schematic {
      * @return true if the schematic is valid, false otherwise
      */
     boolean checkValidity();
+
+    /**
+     * Parses the schematic file and sets the grid, the difficulty and the players.
+     */
+    void parseSchematic();
 
     /**
      * Parses the schematic to transform it into a grid of CellType.
@@ -27,11 +32,4 @@ public interface Schematic {
      * @return a racetrack
      */
     Racetrack deriveTrack();
-
-    /**
-     * Generates a list of players according to the schematic.
-     *
-     * @return the list of players
-     */
-    List<Player> generatePlayers();
 }

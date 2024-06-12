@@ -302,5 +302,3 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 app/src/main/java/it/chribonsi/vector_rally/MainTest.java
-
-app/src/main/resources/nicco.json

@@ -7,18 +7,18 @@ public class SimpleGameManager implements GameManager {
     private final static String[] DIFFICULTY = {"EASY", "MEDIUM", "HARD", "RANDOM"};
     private final int playersNumber;
     private final Path mapPath;
-    private final JSONSchematic gameSchema;
+    private final TXTSchematic gameSchema;
     private final List<Player> players;
     private final Racetrack racetrack;
     private final IOManager ioManager;
 
     public SimpleGameManager() {
         this.ioManager = new IOManager();
-        JSONSchematic tempSchema;
+        TXTSchematic tempSchema;
         Path tempPath;
         do {
             tempPath = this.ioManager.selectSchemaFilePath();
-            tempSchema = new JSONSchematic(tempPath);
+            tempSchema = new TXTSchematic(tempPath);
         } while (tempSchema.checkValidity());
         this.mapPath = tempPath;
         this.gameSchema = tempSchema;

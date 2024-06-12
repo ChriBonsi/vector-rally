@@ -15,11 +15,11 @@ public class IOManager {
      */
     public Path selectSchemaFilePath() {
         Path path = null;
-        while (path == null || !path.toString().endsWith(".json") || !Files.exists(path)) {
-            System.out.println("Please enter the path of the schema file (It should be a .json file):");
+        while (path == null || !path.toString().endsWith(".txt") || !Files.exists(path)) {
+            System.out.println("Please enter the path of the schema file (It should be a .txt file):");
             path = Paths.get(scanner.nextLine());
             if (!Files.exists(path)) {
-                System.out.println("Invalid path. Please enter a valid path ending with '.json'.");
+                System.out.println("Invalid path. Please enter a valid path ending with '.txt'.");
             }
         }
         return path;
