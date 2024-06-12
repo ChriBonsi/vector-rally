@@ -14,10 +14,16 @@ public class SimpleGameManager implements GameManager {
 
     public SimpleGameManager() {
         this.ioManager = new IOManager();
-        this.mapPath = this.ioManager.selectSchemaFilePath();
-        this.gameSchema = new JSONSchematic(this.mapPath);
-        this.playersNumber = this.gameSchema.getPlayers().size();
+        JSONSchematic tempSchema;
+        Path tempPath;
+        do {
+            tempPath = this.ioManager.selectSchemaFilePath();
+            tempSchema = new JSONSchematic(tempPath);
+        } while (tempSchema.checkValidity());
+        this.mapPath = tempPath;
+        this.gameSchema = tempSchema;
         this.players = this.gameSchema.getPlayers();
+        this.playersNumber = this.players.size();
         this.racetrack = this.gameSchema.getTrack();
     }
 
@@ -30,17 +36,5 @@ public class SimpleGameManager implements GameManager {
     @Override
     public boolean stopRace() {
         return false;
-    }
-
-    @Override
-    public Player[] generatePlayers(int totalPlayers, int humanPlayers) {
-        Player[] players = new Player[totalPlayers];
-        for (int i = 0; i < humanPlayers; i++) {
-            players[i] = new HumanPlayer();
-        }
-        for (int i = humanPlayers; i < totalPlayers; i++) {
-            players[i] = new BotPlayer();
-        }
-        return players;
     }
 }

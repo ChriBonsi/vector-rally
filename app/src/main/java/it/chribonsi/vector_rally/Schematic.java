@@ -1,6 +1,5 @@
 package it.chribonsi.vector_rally;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -16,24 +15,23 @@ public interface Schematic {
     boolean checkValidity();
 
     /**
-     * Transforms the schematic into a grid of CellType.
+     * Parses the schematic to transform it into a grid of CellType.
      *
-     * @param schematic the given schematic of the racetrack
      * @return a grid of CellType
      */
-    CellType[][] deriveGrid(File schematic);
+    CellType[][] deriveGrid();
 
     /**
      * Derives a racetrack from the given grid of CellTypes.
      *
-     * @param grid the calculated grid of integers
      * @return a racetrack
      */
-    Racetrack deriveTrack(CellType[][] grid);
+    Racetrack deriveTrack();
 
     /**
-     * Returns the players in the schematic.
+     * Generates a list of players according to the schematic.
+     *
      * @return the list of players
      */
-    List<Player> getPlayers();
+    List<Player> generatePlayers();
 }
