@@ -8,13 +8,6 @@ import java.util.Optional;
 public interface Racetrack {
 
     /**
-     * Checks the validity of the racetrack.
-     *
-     * @return true if the racetrack is valid, false otherwise
-     */
-    boolean isValid();
-
-    /**
      * Adds a player to the racetrack.
      *
      * @param player the player to add

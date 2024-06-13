@@ -37,4 +37,8 @@ public class SimpleGameManager implements GameManager {
     public boolean stopRace() {
         return false;
     }
+
+    public Racetrack getRacetrack() {
+        return this.racetrack;
+    }
 }

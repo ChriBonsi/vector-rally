@@ -8,4 +8,8 @@ public class Position {
         this.x = x;
         this.y = y;
     }
+
+    public static Position of(int x, int y) {
+        return new Position(x, y);
+    }
 }
