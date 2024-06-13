@@ -12,6 +12,7 @@ public class HumanPlayer implements Player {
         return new int[0];
     }
 
+    @Override
     public String getName() {
         return this.name;
     }

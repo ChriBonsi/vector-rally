@@ -31,6 +31,7 @@ public interface Racetrack {
     MoveResult movePlayer(Player player);
 
     //TODO
+
     /**
      * Returns the neighbours of a cell.
      *
@@ -45,14 +46,6 @@ public interface Racetrack {
      * @return the cell
      */
     CellType getCell(Position position);
-
-    /**
-     * Returns the type of cell in the racetrack.
-     *
-     * @param position the coordinates of the cell
-     * @return the state of the cell
-     */
-    CellType getCellType(Position position);
 
     /**
      * Returns the player in a cell.

@@ -9,17 +9,20 @@ import java.util.List;
 
 public class TXTSchematic implements Schematic {
     private final Path filePath;
-    private Difficulty difficulty;
     private final CellType[][] grid;
     private final List<Player> players = new ArrayList<>();
     private final Racetrack track;
     private final List<String> trackLines = new ArrayList<>();
-
+    private Difficulty difficulty = Difficulty.valueOf("EASY");
     public TXTSchematic(Path filePath) {
         this.filePath = filePath;
         this.parseSchematic();
         this.grid = deriveGrid();
         this.track = deriveTrack();
+    }
+
+    public CellType[][] getGrid() {
+        return grid;
     }
 
     @Override
@@ -29,12 +32,12 @@ public class TXTSchematic implements Schematic {
             while ((line = br.readLine()) != null) {
                 switch (line.charAt(0)) {
                     case '\'' -> this.processPlayerLine(line, players);
-                    case '@', '/', '~', 'S', 'F', ' ' -> this.processTrackLine(line, trackLines);
+                    case '@', '/', '~', '-' -> this.processTrackLine(line, trackLines);
                     default -> difficulty = this.processDifficultyLine(line, difficulty);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("An error occurred.");
         }
     }
 
@@ -46,7 +49,7 @@ public class TXTSchematic implements Schematic {
 
     private Difficulty processDifficultyLine(String line, Difficulty currentDifficulty) {
         try {
-            return Difficulty.valueOf(line);
+            return Difficulty.valueOf(line.toUpperCase());
         } catch (IllegalArgumentException e) {
             return currentDifficulty;
         }
@@ -61,9 +64,9 @@ public class TXTSchematic implements Schematic {
         String name = parts[0].replace("'", ""); // Remove quotes
         String type = parts[1];
 
-        if (type.equals("HUMAN")) {
+        if (type.equalsIgnoreCase("HUMAN")) {
             players.add(new HumanPlayer(name));
-        } else if (type.equals("BOT")) {
+        } else if (type.equalsIgnoreCase("BOT")) {
             players.add(new BotPlayer(name));
         }
     }

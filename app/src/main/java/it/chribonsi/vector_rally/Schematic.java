@@ -1,7 +1,5 @@
 package it.chribonsi.vector_rally;
 
-import java.util.List;
-
 /**
  * Parses the file of the structure of a racetrack with its players and returns it.
  */
