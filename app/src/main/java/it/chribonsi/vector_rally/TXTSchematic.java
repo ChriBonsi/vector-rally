@@ -13,6 +13,7 @@ public class TXTSchematic implements Schematic {
     private final List<Player> players = new ArrayList<>();
     private final Racetrack track;
     private final List<String> trackLines = new ArrayList<>();
+    private final List<Position> startingLine = new ArrayList<>();
     private Difficulty difficulty = Difficulty.valueOf("EASY");
 
     public TXTSchematic(Path filePath) {
@@ -82,6 +83,9 @@ public class TXTSchematic implements Schematic {
             String line = this.trackLines.get(i);
             for (int j = 0; j < cols; j++) {
                 grid[i][j] = CellType.fromChar(line.charAt(j));
+                if (grid[i][j] == CellType.START) {
+                    startingLine.add(Position.of(i, j));
+                }
             }
         }
         return grid;
@@ -93,7 +97,7 @@ public class TXTSchematic implements Schematic {
             return null;
         }
         // Implement Racetrack derivation logic
-        return new SimpleRacetrack(this.grid, this.players, this.difficulty);
+        return new SimpleRacetrack(this.grid, this.players, this.difficulty, this.startingLine);
     }
 
     public List<Player> getPlayers() {

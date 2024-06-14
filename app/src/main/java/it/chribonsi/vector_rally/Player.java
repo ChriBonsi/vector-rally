@@ -5,7 +5,7 @@ package it.chribonsi.vector_rally;
  */
 public interface Player {
 
-    int[] decideNextMove();
+    Vector decideNextMove();
 
     /**
      * Returns the name given to the Player.

@@ -8,8 +8,8 @@ public class BotPlayer implements Player {
     }
 
     @Override
-    public int[] decideNextMove() {
-        return new int[0];
+    public Vector decideNextMove() {
+        return null;
     }
 
     @Override

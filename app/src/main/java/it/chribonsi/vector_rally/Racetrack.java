@@ -8,12 +8,11 @@ import java.util.Optional;
 public interface Racetrack {
 
     /**
-     * Adds a player to the racetrack.
+     * Adds a player to the racetrack and positions it on the starting line.
      *
      * @param player the player to add
-     * @return true if the player was added, false otherwise
      */
-    boolean addPlayer(Player player);
+    void addPlayerToStartingLine(Player player);
 
     /**
      * Moves a player on the racetrack.
@@ -23,14 +22,20 @@ public interface Racetrack {
      */
     MoveResult movePlayer(Player player);
 
-    //TODO
-
     /**
      * Returns the neighbours of a cell.
      *
      * @param position the coordinates of the cell
      */
     void getNeighbours(Position position);
+
+    /**
+     * Checks if a cell is free or occupied by a Player.
+     *
+     * @param position the coordinates of the cell
+     * @return true if the cell is free, false otherwise
+     */
+    boolean isCellFree(Position position);
 
     /**
      * Returns the cell in the racetrack.
