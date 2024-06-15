@@ -9,7 +9,9 @@ public class SimpleRacetrack implements Racetrack {
     private final CellType[][] grid;
     private final List<Player> players;
     private final Difficulty difficulty;
+
     private final Map<Player, Position> racePositions = new HashMap<>();
+
     private final List<Position> startingLine;
 
     SimpleRacetrack(CellType[][] grid, List<Player> playerList, Difficulty difficulty, List<Position> startingLine) {
@@ -59,29 +61,21 @@ public class SimpleRacetrack implements Racetrack {
 
     @Override
     public boolean isCellFree(Position position) {
-        return this.getPlayer(position).isEmpty();
+        return this.racePositions.values().stream().noneMatch(p -> p.equals(position));
     }
 
     @Override
     public CellType getCell(Position position) {
-        return null;
+        return this.grid[position.getX()][position.getY()];
     }
 
     @Override
     public Optional<Player> getPlayer(Position position) {
-        for (Player player : this.players) {
-            if (this.racePositions.isEmpty()) {
-                return Optional.empty();
-            }
-            try {
-                if (this.racePositions.get(player).equals(position)) {
-                    return Optional.of(player);
-                }
-            } catch (NullPointerException e) {
-                return Optional.empty();
-            }
+        if (this.racePositions.isEmpty() || !this.racePositions.containsValue(position)) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        return this.racePositions.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
     }
 
     @Override
@@ -92,5 +86,21 @@ public class SimpleRacetrack implements Racetrack {
     @Override
     public int calculateWidth() {
         return 0;
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Map<Player, Position> getRacePositions() {
+        return racePositions;
+    }
+
+    public CellType[][] getGrid() {
+        return grid;
     }
 }

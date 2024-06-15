@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BotPlayerTest {
 
     @Test
-    void decideNextMove() {
+    void testDecideNextMove() {
         //TODO
     }
 }

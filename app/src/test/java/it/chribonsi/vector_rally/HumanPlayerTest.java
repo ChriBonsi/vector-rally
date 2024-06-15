@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HumanPlayerTest {
 
     @Test
-    void decideNextMove() {
+    void testDecideNextMove() {
         //TODO
     }
 }

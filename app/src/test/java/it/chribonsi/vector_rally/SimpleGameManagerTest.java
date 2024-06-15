@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimpleGameManagerTest {
 
     @Test
-    void startRace() {
+    void testStartRace() {
         //TODO
     }
 
     @Test
-    void stopRace() {
+    void testStopRace() {
         //TODO
     }
 }

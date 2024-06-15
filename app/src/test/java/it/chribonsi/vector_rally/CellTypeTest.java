@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CellTypeTest {
 
     @Test
-    void fromChar() {
+    void testFromChar() {
         assertEquals(CellType.ROAD, CellType.fromChar('-'));
         assertEquals(CellType.OUTSIDE, CellType.fromChar('@'));
         assertEquals(CellType.BORDER, CellType.fromChar('/'));
