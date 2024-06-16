@@ -43,6 +43,7 @@ public class SimpleRacetrack implements Racetrack {
 
     @Override
     public MoveResult movePlayer(Player player) {
+        //TODO
         //get the player's current position
         //get the player's next position from the player's strategy
         //check cell type of the next position
@@ -56,7 +57,7 @@ public class SimpleRacetrack implements Racetrack {
 
     @Override
     public void getNeighbours(Position position) {
-
+        //TODO
     }
 
     @Override
@@ -74,20 +75,17 @@ public class SimpleRacetrack implements Racetrack {
         if (this.racePositions.isEmpty() || !this.racePositions.containsValue(position)) {
             return Optional.empty();
         }
-        return this.racePositions.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
+        return this.racePositions.entrySet().stream().filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
     }
 
-    @Override
-    public int calculateHeight() {
-        return 0;
+    public void movePlayerBack(Player player) {
+        //get the player's last position
+        //update the player's position in the map
+        //update the player's last movement in the map
+        //TODO
     }
 
-    @Override
-    public int calculateWidth() {
-        return 0;
-    }
-
+    // Getters
     public Difficulty getDifficulty() {
         return this.difficulty;
     }

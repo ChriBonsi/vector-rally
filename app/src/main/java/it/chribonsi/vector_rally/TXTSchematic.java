@@ -41,7 +41,7 @@ public class TXTSchematic implements Schematic {
 
     @Override
     public boolean checkValidity() {
-        // Implement validity checks as needed
+        //TODO
         return true;
     }
 
@@ -100,6 +100,7 @@ public class TXTSchematic implements Schematic {
         return new SimpleRacetrack(this.grid, this.players, this.difficulty, this.startingLine);
     }
 
+    // Getters
     public List<Player> getPlayers() {
         return this.players;
     }

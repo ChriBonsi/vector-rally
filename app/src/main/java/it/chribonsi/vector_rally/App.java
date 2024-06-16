@@ -3,11 +3,27 @@
  */
 package it.chribonsi.vector_rally;
 
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) {
-        //real flow
+        /*
+         * App istanzia nuovo GameManager --> nel costruttore viene creato un nuovo IOManager -->
+         * -> ciclo per inserimento path --> creata Schematic dal path che parsa tutto -->
+         * -> istanziato nuovo Racetrack --> startRace()
+         */
         System.out.println("starting game...");
         SimpleGameManager gameManager = new SimpleGameManager();
-        gameManager.startRace();
+        if (gameManager.startRace()) {
+            printLeaderboard(gameManager.getLeaderboard());
+        } else throw new RuntimeException("Game Over without a winner!");
+    }
+
+    private static void printLeaderboard(Map<Player, Integer> leaderboard) {
+        System.out.println("Leaderboard:");
+        for (Map.Entry<Player, Integer> entry : leaderboard.entrySet()) {
+            System.out.println("The Player '" + entry.getKey().getName() + "' finished in position #" + entry.getValue());
+        }
+        System.out.println("Congratulations to the winner!\nGame Over");
     }
 }

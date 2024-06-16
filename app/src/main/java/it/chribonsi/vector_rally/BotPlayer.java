@@ -9,6 +9,7 @@ public class BotPlayer implements Player {
 
     @Override
     public Vector decideNextMove() {
+        //TODO
         return null;
     }
 

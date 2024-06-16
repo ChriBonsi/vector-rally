@@ -12,7 +12,7 @@ class SimpleGameManagerTest {
     }
 
     @Test
-    void testStopRace() {
+    void testIsRaceFinished() {
         //TODO
     }
 }

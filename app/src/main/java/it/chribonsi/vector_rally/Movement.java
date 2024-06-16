@@ -6,7 +6,7 @@ package it.chribonsi.vector_rally;
  * in which the player can move with the next move.
  */
 public enum Movement {
-    TOP_L, TOP_C, TOP_R,
-    CENTER_L, CENTER_C, CENTER_R,
-    BOTTOM_L, BOTTOM_C, BOTTOM_R
+    FAST_L, FAST_C, FAST_R,
+    MEDIUM_L, MEDIUM_C, MEDIUM_R,
+    SLOW_L, SLOW_C, SLOW_R
 }

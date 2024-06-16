@@ -52,18 +52,4 @@ public interface Racetrack {
      * @return the player in the cell
      */
     Optional<Player> getPlayer(Position position);
-
-    /**
-     * Calculates the height of the racetrack.
-     *
-     * @return the height
-     */
-    int calculateHeight();
-
-    /**
-     * Calculates the width of the racetrack.
-     *
-     * @return the width
-     */
-    int calculateWidth();
 }
