@@ -9,5 +9,9 @@ public class Vector {
         this.dy = dy;
     }
 
+    public static Vector of(int dx, int dy) {
+        return new Vector(dx, dy);
+    }
+
     //todo
 }

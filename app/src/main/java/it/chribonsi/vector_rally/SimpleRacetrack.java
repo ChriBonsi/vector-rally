@@ -11,7 +11,7 @@ public class SimpleRacetrack implements Racetrack {
     private final Difficulty difficulty;
 
     private final Map<Player, Position> racePositions = new HashMap<>();
-
+    private final Map<Player, Vector> lastMovements = new HashMap<>();
     private final List<Position> startingLine;
 
     SimpleRacetrack(CellType[][] grid, List<Player> playerList, Difficulty difficulty, List<Position> startingLine) {
@@ -23,6 +23,11 @@ public class SimpleRacetrack implements Racetrack {
             this.addPlayerToStartingLine(player);
             System.out.println("Player " + player.getName() + " added to the starting line in position (" + this.racePositions.get(player).getX() + " , " + this.racePositions.get(player).getY() + ")");
         }
+        this.initializePlayersLastMovements();
+    }
+
+    private void initializePlayersLastMovements() {
+        //TODO
     }
 
     @Override
@@ -41,17 +46,47 @@ public class SimpleRacetrack implements Racetrack {
         return startingCell;
     }
 
+    //TODO check correctness
     @Override
     public MoveResult movePlayer(Player player) {
-        //TODO
         //get the player's current position
+        Position currentPosition = this.racePositions.get(player);
+
         //get the player's next position from the player's strategy
+        Movement nextMove = player.decideNextMove();
+        Vector offset = nextMove.getOffset();
+        Position nextPosition = calculateNextPosition(currentPosition, offset);
+
         //check cell type of the next position
-        //get the result of the move
+        CellType nextCellType = this.getCell(nextPosition);
+
+        //get the actual result of the move
+        MoveResult result = this.determineResult(currentPosition, offset);
+
         //if the result is CRASH handle it
-        //update the player's position in the map
-        //update the player's last movement in the map
-        //return the result of the move
+        if (result == MoveResult.CRASH) {
+            //cancel the move and the inertia
+            this.lastMovements.put(player, Vector.of(0, 0));
+            return result;
+        }
+
+        //update the player's position in racePositions
+        this.racePositions.put(player, nextPosition);
+
+        //update the player's last movement
+        this.lastMovements.put(player, offset);
+
+        return result;
+    }
+
+    @Override
+    public MoveResult determineResult(Position currentPosition, Vector offset) {
+        //TODO
+        return null;
+    }
+
+    private Position calculateNextPosition(Position currentPosition, Vector offset) {
+        //TODO
         return null;
     }
 
@@ -76,13 +111,6 @@ public class SimpleRacetrack implements Racetrack {
             return Optional.empty();
         }
         return this.racePositions.entrySet().stream().filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
-    }
-
-    public void movePlayerBack(Player player) {
-        //get the player's last position
-        //update the player's position in the map
-        //update the player's last movement in the map
-        //TODO
     }
 
     // Getters

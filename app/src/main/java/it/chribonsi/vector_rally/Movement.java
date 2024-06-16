@@ -8,5 +8,10 @@ package it.chribonsi.vector_rally;
 public enum Movement {
     FAST_L, FAST_C, FAST_R,
     MEDIUM_L, MEDIUM_C, MEDIUM_R,
-    SLOW_L, SLOW_C, SLOW_R
+    SLOW_L, SLOW_C, SLOW_R;
+
+    public Vector getOffset() {
+        //TODO
+        return null;
+    }
 }

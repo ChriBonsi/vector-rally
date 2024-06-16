@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class SimpleGameManager implements GameManager {
     private final static String[] DIFFICULTY = {"EASY", "MEDIUM", "HARD", "RANDOM"};
-    private final Path mapPath;
     private final TXTSchematic gameSchema;
     private final ArrayList<Player> players;
     private final SimpleRacetrack racetrack;
@@ -17,15 +16,20 @@ public class SimpleGameManager implements GameManager {
     public SimpleGameManager() {
         this.ioManager = new IOManager();
         TXTSchematic tempSchema;
-        Path tempPath;
         do {
-            tempPath = this.ioManager.selectSchemaFilePath();
-            tempSchema = new TXTSchematic(tempPath);
+            tempSchema = new TXTSchematic(this.ioManager.selectSchemaFilePath());
         } while (!tempSchema.checkValidity());
-        this.mapPath = tempPath;
         this.gameSchema = tempSchema;
         this.players = (ArrayList<Player>) this.gameSchema.getPlayers();
         this.racetrack = this.gameSchema.getTrack();
+    }
+
+    // Constructor meant for testing
+    public SimpleGameManager(Path mapPath) {
+        this.gameSchema = new TXTSchematic(mapPath);
+        this.players = (ArrayList<Player>) gameSchema.getPlayers();
+        this.racetrack = this.gameSchema.getTrack();
+        this.ioManager = null;
     }
 
     @Override
@@ -44,8 +48,6 @@ public class SimpleGameManager implements GameManager {
         if (thisResult == MoveResult.WIN) {
             this.players.remove(player);
             this.addPlayerToLeaderboard(player);
-        } else if (thisResult == MoveResult.CRASH) {
-            this.racetrack.movePlayerBack(player);
         }
     }
 

@@ -8,7 +8,7 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public Vector decideNextMove() {
+    public Movement decideNextMove() {
         //TODO
         return null;
     }
