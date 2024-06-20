@@ -65,7 +65,8 @@ public class TXTSchematic implements Schematic {
         if (type.equalsIgnoreCase("HUMAN")) {
             players.add(new HumanPlayer(name));
         } else if (type.equalsIgnoreCase("BOT")) {
-            players.add(new BotPlayer(name));
+            //TODO
+            //players.add(new BotPlayer(name));
         }
     }
 

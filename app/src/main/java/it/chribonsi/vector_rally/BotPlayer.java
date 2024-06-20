@@ -1,6 +1,6 @@
 package it.chribonsi.vector_rally;
 
-public class BotPlayer implements Player {
+public abstract class BotPlayer implements Player {
     private final String name;
 
     public BotPlayer(String name) {
@@ -8,10 +8,7 @@ public class BotPlayer implements Player {
     }
 
     @Override
-    public Movement decideNextMove() {
-        //TODO
-        return null;
-    }
+    public abstract Movement decideNextMove();
 
     @Override
     public String getName() {
