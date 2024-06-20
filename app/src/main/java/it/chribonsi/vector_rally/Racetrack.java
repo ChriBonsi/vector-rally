@@ -32,13 +32,6 @@ public interface Racetrack {
     MoveResult determineResult(Position currentPosition, Vector offset, Position nextPosition);
 
     /**
-     * Returns the neighbours of a cell.
-     *
-     * @param position the coordinates of the cell
-     */
-    void getNeighbours(Position position);
-
-    /**
      * Checks if a cell is free or occupied by a Player.
      *
      * @param position the coordinates of the cell

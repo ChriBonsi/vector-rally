@@ -44,57 +44,102 @@ public class SimpleRacetrack implements Racetrack {
         return startingCell;
     }
 
-    //TODO check correctness
     @Override
     public MoveResult movePlayer(Player player) {
-        //get the player's current position
+        // Get the player's current position
         Position currentPosition = this.racePositions.get(player);
 
-        //get the player's next position from the player's strategy
+        // Get the player's next position from the player's strategy
         Movement nextMove = player.decideNextMove();
-        Vector offset = nextMove.getOffset(this.getLastMove(player));
-        Position nextPosition = calculateNextPosition(currentPosition, offset, player);
+        if (nextMove == null) {
+            return MoveResult.CRASH;
+        }
+        Vector playerMovement = this.getLastMove(player).sum(nextMove.getOffset());
 
-        //check cell type of the next position TODO forse eliminare
-        CellType nextCellType = this.getCell(nextPosition);
+        Position nextPosition = calculateNextPosition(currentPosition, playerMovement);
 
-        //get the actual result of the move
-        MoveResult result = this.determineResult(currentPosition, offset, nextPosition);
+        // Get the actual result of the move
+        MoveResult result = this.determineResult(currentPosition, playerMovement, nextPosition);
 
-        //if the result is CRASH handle it
+        // If the result is CRASH handle it
         if (result == MoveResult.CRASH) {
-            //cancel the move and the inertia
+            // Cancel the move and the inertia
             this.lastMovements.put(player, Vector.of(0, 0));
             return result;
         }
 
-        //update the player's position in racePositions
+        // Update the player's position in racePositions
         this.racePositions.put(player, nextPosition);
 
-        //update the player's last movement
-        this.lastMovements.put(player, offset);
+        // Update the player's last movement
+        this.lastMovements.put(player, playerMovement);
 
         return result;
     }
 
     @Override
     public MoveResult determineResult(Position currentPosition, Vector offset, Position nextPosition) {
-        //TODO
-        CellType landingCell = this.getCell(nextPosition);
-        if (this.isCellFree(nextPosition)) {
-            return MoveResult.OK;
+        // Check if the path is clear
+        if (isPathClear(currentPosition, nextPosition)) {
+            // Check the type of the landing cell
+            CellType landingCell = this.getCell(nextPosition);
+            return switch (landingCell) {
+                case FINISH -> MoveResult.WIN;
+                case ROAD, START -> MoveResult.OK;
+                default -> MoveResult.CRASH;
+            };
         }
-        return null;
+        return MoveResult.CRASH;
     }
 
-    private Position calculateNextPosition(Position currentPosition, Vector offset, Player player) {
-        //TODO
-        return null;
+    private Position calculateNextPosition(Position currentPosition, Vector offset) {
+        return offset.addTo(currentPosition);
     }
 
-    @Override
-    public void getNeighbours(Position position) {
-        //TODO
+    private boolean isPathClear(Position start, Position end) {
+        int x0 = start.getX();
+        int y0 = start.getY();
+        int x1 = end.getX();
+        int y1 = end.getY();
+
+        int dx = Math.abs(x1 - x0);
+        int dy = Math.abs(y1 - y0);
+
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+
+        int err = dx - dy;
+
+        while (true) {
+            // Check if the current cell is free
+            CellType cellType = this.getCell(Position.of(x0, y0));
+            if (!isValidPathCell(cellType)) {
+                return false;
+            }
+
+            // If we've reached the end point, break
+            if (x0 == x1 && y0 == y1) {
+                break;
+            }
+
+            int e2 = 2 * err;
+
+            if (e2 > -dy) {
+                err -= dy;
+                x0 += sx;
+            }
+
+            if (e2 < dx) {
+                err += dx;
+                y0 += sy;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isValidPathCell(CellType cellType) {
+        return cellType == CellType.ROAD || cellType == CellType.START || cellType == CellType.FINISH;
     }
 
     @Override
