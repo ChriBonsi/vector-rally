@@ -29,7 +29,7 @@ public interface Racetrack {
      * @param offset          the offset of the movement
      * @return the result of the movement
      */
-    MoveResult determineResult(Position currentPosition, Vector offset);
+    MoveResult determineResult(Position currentPosition, Vector offset, Position nextPosition);
 
     /**
      * Returns the neighbours of a cell.

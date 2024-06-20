@@ -10,7 +10,7 @@ public enum Movement {
     MEDIUM_L, MEDIUM_C, MEDIUM_R,
     SLOW_L, SLOW_C, SLOW_R;
 
-    public Vector getOffset() {
+    public Vector getOffset(Vector lastMovement) {
         //TODO
         return null;
     }

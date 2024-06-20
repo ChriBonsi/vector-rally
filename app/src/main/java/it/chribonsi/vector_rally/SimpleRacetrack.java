@@ -19,15 +19,13 @@ public class SimpleRacetrack implements Racetrack {
         this.players = playerList;
         this.difficulty = difficulty;
         this.startingLine = startingLine;
-        for (Player player : playerList) {
-            this.addPlayerToStartingLine(player);
-            System.out.println("Player " + player.getName() + " added to the starting line in position (" + this.racePositions.get(player).getX() + " , " + this.racePositions.get(player).getY() + ")");
-        }
+        playerList.forEach(this::addPlayerToStartingLine);
+        this.racePositions.forEach((key, value) -> System.out.println("Player " + key.getName() + " added to the starting line in position (" + value.getX() + " , " + value.getY() + ")")); //TODO eliminare
         this.initializePlayersLastMovements();
     }
 
     private void initializePlayersLastMovements() {
-        //TODO
+        players.forEach(player -> this.lastMovements.put(player, Vector.of(0, 0)));
     }
 
     @Override
@@ -54,14 +52,14 @@ public class SimpleRacetrack implements Racetrack {
 
         //get the player's next position from the player's strategy
         Movement nextMove = player.decideNextMove();
-        Vector offset = nextMove.getOffset();
-        Position nextPosition = calculateNextPosition(currentPosition, offset);
+        Vector offset = nextMove.getOffset(this.getLastMove(player));
+        Position nextPosition = calculateNextPosition(currentPosition, offset, player);
 
-        //check cell type of the next position
+        //check cell type of the next position TODO forse eliminare
         CellType nextCellType = this.getCell(nextPosition);
 
         //get the actual result of the move
-        MoveResult result = this.determineResult(currentPosition, offset);
+        MoveResult result = this.determineResult(currentPosition, offset, nextPosition);
 
         //if the result is CRASH handle it
         if (result == MoveResult.CRASH) {
@@ -80,12 +78,16 @@ public class SimpleRacetrack implements Racetrack {
     }
 
     @Override
-    public MoveResult determineResult(Position currentPosition, Vector offset) {
+    public MoveResult determineResult(Position currentPosition, Vector offset, Position nextPosition) {
         //TODO
+        CellType landingCell = this.getCell(nextPosition);
+        if (this.isCellFree(nextPosition)) {
+            return MoveResult.OK;
+        }
         return null;
     }
 
-    private Position calculateNextPosition(Position currentPosition, Vector offset) {
+    private Position calculateNextPosition(Position currentPosition, Vector offset, Player player) {
         //TODO
         return null;
     }
@@ -111,6 +113,10 @@ public class SimpleRacetrack implements Racetrack {
             return Optional.empty();
         }
         return this.racePositions.entrySet().stream().filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
+    }
+
+    private Vector getLastMove(Player player) {
+        return this.lastMovements.get(player);
     }
 
     // Getters
