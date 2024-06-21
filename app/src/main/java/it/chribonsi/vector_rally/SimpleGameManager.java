@@ -41,6 +41,7 @@ public class SimpleGameManager implements GameManager {
             for (Player player : this.players) {
                 this.playerMove(player);
             }
+            if (i > 20) break;
         }
         return this.isRaceFinished();
     }
@@ -72,9 +73,5 @@ public class SimpleGameManager implements GameManager {
     // Getters
     public Map<Player, Integer> getLeaderboard() {
         return this.leaderboard;
-    }
-
-    public Racetrack getRacetrack() {
-        return this.racetrack;
     }
 }
