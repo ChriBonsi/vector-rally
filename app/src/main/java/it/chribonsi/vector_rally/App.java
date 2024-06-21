@@ -5,6 +5,8 @@ package it.chribonsi.vector_rally;
 
 import java.util.Map;
 
+// C:/Users/chri9/Desktop/oval.txt
+
 public class App {
     public static void main(String[] args) {
         /*
@@ -16,7 +18,7 @@ public class App {
         SimpleGameManager gameManager = new SimpleGameManager();
         if (gameManager.startRace()) {
             printLeaderboard(gameManager.getLeaderboard());
-        } else throw new RuntimeException("Game Over without a winner!");
+        } else throw new RuntimeException("Game Over without any winner!");
     }
 
     private static void printLeaderboard(Map<Player, Integer> leaderboard) {

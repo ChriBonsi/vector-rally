@@ -8,16 +8,14 @@ import java.util.Optional;
 public class SimpleRacetrack implements Racetrack {
     private final CellType[][] grid;
     private final List<Player> players;
-    private final Difficulty difficulty;
 
     private final Map<Player, Position> racePositions = new HashMap<>();
     private final Map<Player, Vector> lastMovements = new HashMap<>();
     private final List<Position> startingLine;
 
-    SimpleRacetrack(CellType[][] grid, List<Player> playerList, Difficulty difficulty, List<Position> startingLine) {
+    SimpleRacetrack(CellType[][] grid, List<Player> playerList, List<Position> startingLine) {
         this.grid = grid;
         this.players = playerList;
-        this.difficulty = difficulty;
         this.startingLine = startingLine;
         playerList.forEach(this::addPlayerToStartingLine);
         this.racePositions.forEach((key, value) -> System.out.println("Player " + key.getName() + " added to the starting line in position (" + value.getX() + " , " + value.getY() + ")")); //TODO eliminare
@@ -64,6 +62,7 @@ public class SimpleRacetrack implements Racetrack {
         // If the result is CRASH handle it
         if (result == MoveResult.CRASH) {
             // Cancel the move and the inertia
+            System.out.println("CRASH: Player " + player.getName() + " crashed in position (" + nextPosition.getX() + " , " + nextPosition.getY() + ")");
             this.lastMovements.put(player, Vector.of(0, 0));
             return result;
         }
@@ -165,10 +164,6 @@ public class SimpleRacetrack implements Racetrack {
     }
 
     // Getters
-    public Difficulty getDifficulty() {
-        return this.difficulty;
-    }
-
     public List<Player> getPlayers() {
         return players;
     }

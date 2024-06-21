@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SimpleGameManager implements GameManager {
-    private final static String[] DIFFICULTY = {"EASY", "MEDIUM", "HARD", "RANDOM"};
     private final TXTSchematic gameSchema;
     private final ArrayList<Player> players;
     private final SimpleRacetrack racetrack;
     private final IOManager ioManager;
     private final HashMap<Player, Integer> leaderboard = new HashMap<>();
 
+    //TODO: gameSchema potrebbe essere una variabile locale
     public SimpleGameManager() {
         this.ioManager = new IOManager();
         TXTSchematic tempSchema;
@@ -35,13 +35,21 @@ public class SimpleGameManager implements GameManager {
     @Override
     public boolean startRace() {
         System.out.println("Starting race with " + this.players.size() + " players on the track.");
+        int i = 1;
         while (!this.isRaceFinished()) {
+            i = this.printRaceStatus(i);
             for (Player player : this.players) {
                 this.playerMove(player);
             }
         }
         return this.isRaceFinished();
     }
+
+    private int printRaceStatus(int counter) {
+        System.out.println("Turn #" + counter);
+        return counter + 1;
+    }
+
 
     private void playerMove(Player player) {
         MoveResult thisResult = this.racetrack.movePlayer(player);

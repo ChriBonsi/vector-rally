@@ -14,7 +14,6 @@ public class TXTSchematic implements Schematic {
     private final SimpleRacetrack track;
     private final List<String> trackLines = new ArrayList<>();
     private final List<Position> startingLine = new ArrayList<>();
-    private Difficulty difficulty = Difficulty.valueOf("EASY");
 
     public TXTSchematic(Path filePath) {
         this.filePath = filePath;
@@ -31,7 +30,7 @@ public class TXTSchematic implements Schematic {
                 switch (line.charAt(0)) {
                     case '\'' -> this.processPlayerLine(line, players);
                     case '@', '/', '~', '-' -> this.processTrackLine(line, trackLines);
-                    default -> difficulty = this.processDifficultyLine(line, difficulty);
+                    default -> System.out.println("Invalid line: " + line);
                 }
             }
         } catch (IOException e) {
@@ -45,14 +44,6 @@ public class TXTSchematic implements Schematic {
         return true;
     }
 
-    private Difficulty processDifficultyLine(String line, Difficulty currentDifficulty) {
-        try {
-            return Difficulty.valueOf(line.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return currentDifficulty;
-        }
-    }
-
     private void processTrackLine(String line, List<String> trackLines) {
         trackLines.add(line);
     }
@@ -62,11 +53,17 @@ public class TXTSchematic implements Schematic {
         String name = parts[0].replace("'", ""); // Remove quotes
         String type = parts[1];
 
-        if (type.equalsIgnoreCase("HUMAN")) {
-            players.add(new HumanPlayer(name));
-        } else if (type.equalsIgnoreCase("BOT")) {
-            //TODO
-            //players.add(new BotPlayer(name));
+        this.selectPlayerType(type.toUpperCase(), name);
+    }
+
+    private void selectPlayerType(String line, String name) {
+        switch (line) {
+            case "HUMAN" -> players.add(new HumanPlayer(name));
+            case "EASY" -> players.add(new EasyBotPlayer(name));
+            case "MEDIUM" -> players.add(new MediumBotPlayer(name));
+            case "HARD" -> players.add(new HardBotPlayer(name));
+            case "RANDOM" -> players.add(new RandomBotPlayer(name));
+            default -> this.selectPlayerType(Difficulty.getRandomDifficulty().toString(), name);
         }
     }
 
@@ -98,7 +95,7 @@ public class TXTSchematic implements Schematic {
             return null;
         }
         // Implement Racetrack derivation logic
-        return new SimpleRacetrack(this.grid, this.players, this.difficulty, this.startingLine);
+        return new SimpleRacetrack(this.grid, this.players, this.startingLine);
     }
 
     // Getters
@@ -112,10 +109,6 @@ public class TXTSchematic implements Schematic {
 
     public CellType[][] getGrid() {
         return grid;
-    }
-
-    public Difficulty getDifficulty() {
-        return difficulty;
     }
 
     public List<Position> getStartingLine() {

@@ -5,5 +5,10 @@ public class HardBotPlayer extends BotPlayer {
     public HardBotPlayer(String name) {
         super(name);
     }
+
+    @Override
+    public Movement decideNextMove() {
+        return null;
+    }
     //TODO
 }

@@ -15,6 +15,7 @@ class TXTSchematicTest {
         TXTSchematic schematic = new TXTSchematic(testFilePath);
 
         assertEquals(3, schematic.getPlayers().size());
+        //TODO add test to check player types and modify schema_test.txt
         assertNotNull(schematic.getGrid());
         assertNotNull(schematic.getTrack());
     }
@@ -51,7 +52,6 @@ class TXTSchematicTest {
 
         SimpleRacetrack track = schematic.getTrack();
         assertNotNull(track);
-        assertEquals(Difficulty.HARD, track.getDifficulty());
         assertEquals(3, track.getPlayers().size());
     }
 }
