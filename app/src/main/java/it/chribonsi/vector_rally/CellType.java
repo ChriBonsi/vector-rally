@@ -18,6 +18,7 @@ public enum CellType {
             case '@' -> OUTSIDE;
             case '/' -> BORDER;
             case '~' -> START;
+            case '#' -> FINISH;
             default -> throw new IllegalArgumentException("Unknown cell type: " + c);
         };
     }

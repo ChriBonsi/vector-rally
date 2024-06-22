@@ -8,7 +8,7 @@ public abstract class BotPlayer implements Player {
     }
 
     @Override
-    public abstract Movement decideNextMove();
+    public abstract Movement decideNextMove(SimpleRacetrack simpleRacetrack);
 
     @Override
     public String getName() {

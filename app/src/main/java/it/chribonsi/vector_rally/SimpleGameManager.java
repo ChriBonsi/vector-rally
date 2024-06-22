@@ -3,6 +3,7 @@ package it.chribonsi.vector_rally;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SimpleGameManager implements GameManager {
@@ -32,34 +33,48 @@ public class SimpleGameManager implements GameManager {
     @Override
     public boolean startRace() {
         System.out.println("Starting race with " + this.players.size() + " players on the track.");
-        int i = 1;
+        int i = 0;
         while (!this.isRaceFinished()) {
             i = this.printRaceStatus(i);
+            List<Player> winners = new ArrayList<>();
             for (Player player : this.players) {
-                this.playerMove(player);
+                MoveResult a = this.playerMove(player);
+                if (a == MoveResult.WIN) {
+                    winners.add(player);
+                }
             }
-            if (i > 20) break;
+            if (!winners.isEmpty()) {
+                winners.forEach(players::remove);
+            }
         }
         return this.isRaceFinished();
     }
 
     private int printRaceStatus(int counter) {
-        System.out.println("Turn #" + counter);
-        return counter + 1;
+        counter++;
+        System.out.println("\nTurn #" + counter);
+        for (Player player : this.players) {
+            System.out.println("Player " + player.getName() + " starts at" +
+                    " position (" + this.racetrack.getRacePositions().get(player) + ")");
+        }
+        System.out.println("\n");
+        return counter;
     }
 
 
-    private void playerMove(Player player) {
+    private MoveResult playerMove(Player player) {
         MoveResult thisResult = this.racetrack.movePlayer(player);
         if (thisResult == MoveResult.WIN) {
-            this.players.remove(player);
+            System.out.println("WIN: Player " + player.getName() + " has finished the race in position #" + (this.leaderboard.size() + 1));
+            //this.players.remove(player);
             this.addPlayerToLeaderboard(player);
         }
+        return thisResult;
     }
 
     @Override
     public boolean isRaceFinished() {
-        return this.leaderboard.size() == this.players.size();
+        return !this.leaderboard.isEmpty() && this.players.isEmpty();
     }
 
     @Override

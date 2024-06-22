@@ -48,13 +48,14 @@ public class SimpleRacetrack implements Racetrack {
         Position currentPosition = this.racePositions.get(player);
 
         // Get the player's next position from the player's strategy
-        Movement nextMove = player.decideNextMove();
+        Movement nextMove = player.decideNextMove(this);
         if (nextMove == null) {
             return MoveResult.CRASH;
         }
         Vector playerMovement = this.getLastMove(player).sum(nextMove.getOffset());
 
         Position nextPosition = calculateNextPosition(currentPosition, playerMovement);
+        System.out.println("MOVE: Player " + player.getName() + " tries to move to " + nextPosition.toString());
 
         // Get the actual result of the move
         MoveResult result = this.determineResult(currentPosition, playerMovement, nextPosition);
@@ -159,10 +160,6 @@ public class SimpleRacetrack implements Racetrack {
         return this.racePositions.entrySet().stream().filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
     }
 
-    private Vector getLastMove(Player player) {
-        return this.lastMovements.get(player);
-    }
-
     // Getters
     public List<Player> getPlayers() {
         return players;
@@ -174,5 +171,9 @@ public class SimpleRacetrack implements Racetrack {
 
     public CellType[][] getGrid() {
         return grid;
+    }
+
+    public Vector getLastMove(Player player) {
+        return this.lastMovements.get(player);
     }
 }

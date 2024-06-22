@@ -8,7 +8,7 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public Movement decideNextMove() {
+    public Movement decideNextMove(SimpleRacetrack simpleRacetrack) {
         //TODO
         return null;
     }

@@ -20,7 +20,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Movement decideNextMove() {
+    public Movement decideNextMove(SimpleRacetrack simpleRacetrack) {
         return this.move;
     }
 

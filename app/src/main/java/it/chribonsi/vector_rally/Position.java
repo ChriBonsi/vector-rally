@@ -30,10 +30,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position {" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "position (" + x + ", " + y + ")";
     }
 
     // Getters

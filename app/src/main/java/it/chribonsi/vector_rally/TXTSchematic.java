@@ -29,7 +29,7 @@ public class TXTSchematic implements Schematic {
             while ((line = br.readLine()) != null) {
                 switch (line.charAt(0)) {
                     case '\'' -> this.processPlayerLine(line, players);
-                    case '@', '/', '~', '-' -> this.processTrackLine(line, trackLines);
+                    case '@', '/', '~', '-', '#' -> this.processTrackLine(line, trackLines);
                     default -> System.out.println("Invalid line: " + line);
                 }
             }

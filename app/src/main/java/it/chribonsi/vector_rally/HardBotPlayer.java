@@ -7,7 +7,7 @@ public class HardBotPlayer extends BotPlayer {
     }
 
     @Override
-    public Movement decideNextMove() {
+    public Movement decideNextMove(SimpleRacetrack simpleRacetrack) {
         return null;
     }
     //TODO

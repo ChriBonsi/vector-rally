@@ -17,7 +17,7 @@ class IOManagerTest {
         Path testFilePath = Paths.get("src/test/resources/test.txt");
 
         // Simulate user input with the test file path
-        String simulatedInput = testFilePath.toString() + "\n";
+        String simulatedInput = testFilePath + "\n";
         InputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
 
         // Create IOManager instance with the simulated input

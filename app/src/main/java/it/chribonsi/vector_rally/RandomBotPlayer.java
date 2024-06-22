@@ -7,7 +7,7 @@ public class RandomBotPlayer extends BotPlayer {
     }
 
     @Override
-    public Movement decideNextMove() {
-        return Movement.getRandomMovement();
+    public Movement decideNextMove(SimpleRacetrack simpleRacetrack) {
+        return Movement.getRandomMovement(Movement.VALUES);
     }
 }

@@ -38,10 +38,7 @@ public class Vector {
 
     @Override
     public String toString() {
-        return "Vector {" +
-                "dx=" + dx +
-                ", dy=" + dy +
-                '}';
+        return "vector (" + dx + ", " + dy + ")";
     }
 
     // Getters
