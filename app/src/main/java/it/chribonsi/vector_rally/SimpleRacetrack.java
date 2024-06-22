@@ -154,10 +154,10 @@ public class SimpleRacetrack implements Racetrack {
 
     @Override
     public Optional<Player> getPlayer(Position position) {
-        if (this.racePositions.isEmpty() || !this.racePositions.containsValue(position)) {
-            return Optional.empty();
-        }
-        return this.racePositions.entrySet().stream().filter(entry -> entry.getValue().equals(position)).findFirst().map(Map.Entry::getKey);
+        return this.racePositions.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(position))
+                .map(Map.Entry::getKey)
+                .findFirst();
     }
 
     // Getters
