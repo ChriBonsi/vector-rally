@@ -31,18 +31,6 @@ class SimpleRacetrackTest {
     }
 
     @Test
-    void testMovePlayer() {
-        //TODO
-        //throw new UnsupportedOperationException("Not implemented yet");
-    }
-
-    @Test
-    void testGetNeighbours() {
-        //TODO
-        //throw new UnsupportedOperationException("Not implemented yet");
-    }
-
-    @Test
     void testIsCellFree() {
         assertTrue(r.isCellFree(Position.of(0, 0)));
         r.getRacePositions().forEach((k, v) -> Assertions.assertFalse(r.isCellFree(v)));

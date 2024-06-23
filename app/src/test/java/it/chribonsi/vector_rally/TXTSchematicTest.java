@@ -15,7 +15,13 @@ class TXTSchematicTest {
         TXTSchematic schematic = new TXTSchematic(testFilePath);
 
         assertEquals(3, schematic.getPlayers().size());
-        //TODO add test to check player types and modify schema_test.txt
+
+        schematic.getPlayers().forEach(player -> {
+            assertNotNull(player);
+            assertTrue(player instanceof EasyBotPlayer || player instanceof MediumBotPlayer ||
+                    player instanceof HardBotPlayer || player instanceof HumanPlayer);
+        });
+
         assertNotNull(schematic.getGrid());
         assertNotNull(schematic.getTrack());
     }
@@ -28,8 +34,8 @@ class TXTSchematicTest {
         TXTSchematic validSchematic = new TXTSchematic(validFilePath);
         TXTSchematic invalidSchematic = new TXTSchematic(invalidFilePath);
 
-        assertTrue(validSchematic.checkValidity());
-        //assertFalse(invalidSchematic.checkValidity()); //TODO
+        assertTrue(validSchematic::checkValidity);
+        assertFalse(invalidSchematic::checkValidity);
     }
 
     @Test

@@ -3,7 +3,7 @@ package it.chribonsi.vector_rally;
 import java.util.Random;
 
 public enum Difficulty {
-    EASY, MEDIUM, HARD;
+    EASY, MEDIUM;
 
     private static final Random RANDOMIZER = new Random();
     private static final Difficulty[] VALUES = values();

@@ -102,7 +102,6 @@ public class TXTSchematic implements Schematic {
             case "HUMAN" -> players.add(new HumanPlayer(name));
             case "EASY" -> players.add(new EasyBotPlayer(name));
             case "MEDIUM" -> players.add(new MediumBotPlayer(name));
-            case "HARD" -> players.add(new HardBotPlayer(name));
             default -> this.selectPlayerType(Difficulty.getRandomDifficulty().toString(), name);
         }
     }
