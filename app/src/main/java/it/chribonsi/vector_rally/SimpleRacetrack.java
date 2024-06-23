@@ -31,7 +31,7 @@ public class SimpleRacetrack implements Racetrack {
     public void addPlayerToStartingLine(Player player) {
         this.racePositions.put(player, this.selectRandomStartingCell());
 
-        System.out.println("Player " + player.getName() + " starts at position " + this.racePositions.get(player).toString());
+        System.out.println("Player " + player.name() + " starts at position " + this.racePositions.get(player).toString());
 
     }
 
@@ -67,7 +67,7 @@ public class SimpleRacetrack implements Racetrack {
         // If the result is CRASH handle it
         if (result == MoveResult.CRASH) {
             // Cancel the move and the inertia
-            System.out.println("CRASH: Player " + player.getName() + " crashed in " + nextPosition);
+            System.out.println("CRASH: Player " + player.name() + " crashed in " + nextPosition);
             this.lastMovements.put(player, Vector.of(0, 0));
             return result;
         }
@@ -178,9 +178,5 @@ public class SimpleRacetrack implements Racetrack {
 
     public Vector getLastMove(Player player) {
         return this.lastMovements.get(player);
-    }
-
-    public Position getCurrentPosition(Player player) {
-        return this.racePositions.get(player);
     }
 }

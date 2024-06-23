@@ -26,7 +26,7 @@ public class IOManager {
                 boolean isPlayer = false;
                 for (Map.Entry<Player, Position> entry : playersPositions.entrySet()) {
                     if (entry.getValue().equals(Position.of(i, j))) {
-                        System.out.print(entry.getKey().getName().charAt(0));
+                        System.out.print(entry.getKey().name().charAt(0));
                         isPlayer = true;
                         break;
                     }

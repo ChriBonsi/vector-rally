@@ -12,7 +12,7 @@ public interface Player {
      *
      * @return the name
      */
-    String getName();
+    String name();
 
     /**
      * Checks if the player is accelerating.
@@ -36,7 +36,7 @@ public interface Player {
         return Movement.MIDDLE_C;
     }
 
-    default Movement accelerate(Vector lastMove) {
+    default Movement accelerate() {
         return Movement.getRandomMovement(Movement.TOP_C, Movement.TOP_R, Movement.MIDDLE_R);
     }
 

@@ -11,7 +11,7 @@ public abstract class BotPlayer implements Player {
     public abstract Movement decideNextMove(SimpleRacetrack simpleRacetrack);
 
     @Override
-    public String getName() {
+    public String name() {
         return this.name;
     }
 }

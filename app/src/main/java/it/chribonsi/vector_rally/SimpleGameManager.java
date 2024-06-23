@@ -60,7 +60,7 @@ public class SimpleGameManager implements GameManager {
     private MoveResult playerMove(Player player) {
         MoveResult moveResult = this.racetrack.movePlayer(player);
         if (moveResult == MoveResult.WIN) {
-            System.out.println("WIN: Player " + player.getName() + " has finished the race in position #" + (this.leaderboard.size() + 1));
+            System.out.println("WIN: Player " + player.name() + " has finished the race in position #" + (this.leaderboard.size() + 1));
             this.addPlayerToLeaderboard(player);
         }
         return moveResult;

@@ -28,7 +28,7 @@ public class TXTSchematic implements Schematic {
             String line;
             while ((line = br.readLine()) != null) {
                 switch (line.charAt(0)) {
-                    case '\'' -> this.processPlayerLine(line, players);
+                    case '\'' -> this.processPlayerLine(line);
                     case '@', '/', '~', '-', '#' -> this.processTrackLine(line, trackLines);
                     default -> System.out.println("Invalid line: " + line);
                 }
@@ -48,7 +48,7 @@ public class TXTSchematic implements Schematic {
         trackLines.add(line);
     }
 
-    private void processPlayerLine(String line, List<Player> players) {
+    private void processPlayerLine(String line) {
         String[] parts = line.split(" ");
         String name = parts[0].replace("'", ""); // Remove quotes
         String type = parts[1];
@@ -108,9 +108,5 @@ public class TXTSchematic implements Schematic {
 
     public CellType[][] getGrid() {
         return grid;
-    }
-
-    public List<Position> getStartingLine() {
-        return startingLine;
     }
 }

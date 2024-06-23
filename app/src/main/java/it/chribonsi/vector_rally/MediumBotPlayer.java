@@ -13,7 +13,7 @@ public class MediumBotPlayer extends BotPlayer {
         if (lastMove.equals(Vector.of(0, 0))) {
             return this.chooseDirection();
         } else if (this.isAccelerating(lastMove, 4)) {
-            return this.accelerate(lastMove);
+            return this.accelerate();
         } else {
             return this.goSteady();
         }

@@ -23,7 +23,7 @@ public class App {
     private static void printLeaderboard(Map<Player, Integer> leaderboard) {
         System.out.println("Leaderboard:");
         for (Map.Entry<Player, Integer> entry : leaderboard.entrySet()) {
-            System.out.println("The Player '" + entry.getKey().getName() + "' finished in position #" + entry.getValue());
+            System.out.println("The Player '" + entry.getKey().name() + "' finished in position #" + entry.getValue());
         }
         System.out.println("============================================\nCongratulations to the winner!\nGame Over");
     }
