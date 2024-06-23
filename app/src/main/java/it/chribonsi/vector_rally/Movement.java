@@ -32,11 +32,6 @@ public enum Movement {
         return array[RANDOMIZER.nextInt(VALUES.length)];
     }
 
-    public static Movement getDirection(Vector vector) {
-
-        return null;
-    }
-
     /**
      * Returns the offset of the movement.
      *
