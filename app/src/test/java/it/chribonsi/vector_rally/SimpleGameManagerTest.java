@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 class SimpleGameManagerTest {
 
     @Test
-    void testStartRace() {
+    void testRace() {
         //TODO
 
         SimpleGameManager gameManager = new SimpleGameManager(Paths.get("src/test/resources/schema_test.txt"));

@@ -18,17 +18,21 @@ public class SimpleRacetrack implements Racetrack {
         this.players = playerList;
         this.startingLine = startingLine;
         playerList.forEach(this::addPlayerToStartingLine);
-        this.racePositions.forEach((key, value) -> System.out.println("Player " + key.getName() + " added to the starting line in position (" + value.getX() + " , " + value.getY() + ")")); //TODO eliminare
         this.initializePlayersLastMovements();
     }
 
     private void initializePlayersLastMovements() {
         players.forEach(player -> this.lastMovements.put(player, Vector.of(0, 0)));
+
+        IOManager.printMap(this.grid, this.racePositions);
     }
 
     @Override
     public void addPlayerToStartingLine(Player player) {
         this.racePositions.put(player, this.selectRandomStartingCell());
+
+        System.out.println("Player " + player.getName() + " starts at position " + this.racePositions.get(player).toString());
+
     }
 
     private Position selectRandomStartingCell() {
@@ -55,7 +59,7 @@ public class SimpleRacetrack implements Racetrack {
         Vector playerMovement = this.getLastMove(player).sum(nextMove.getOffset());
 
         Position nextPosition = calculateNextPosition(currentPosition, playerMovement);
-        System.out.println("MOVE: Player " + player.getName() + " tries to move to " + nextPosition.toString());
+        //System.out.println("MOVE: Player " + player.getName() + " tries to move to " + nextPosition.toString());
 
         // Get the actual result of the move
         MoveResult result = this.determineResult(currentPosition, playerMovement, nextPosition);
@@ -63,11 +67,10 @@ public class SimpleRacetrack implements Racetrack {
         // If the result is CRASH handle it
         if (result == MoveResult.CRASH) {
             // Cancel the move and the inertia
-            System.out.println("CRASH: Player " + player.getName() + " crashed in position (" + nextPosition.getX() + " , " + nextPosition.getY() + ")");
+            System.out.println("CRASH: Player " + player.getName() + " crashed in " + nextPosition);
             this.lastMovements.put(player, Vector.of(0, 0));
             return result;
         }
-
         // Update the player's position in racePositions
         this.racePositions.put(player, nextPosition);
 

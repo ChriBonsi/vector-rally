@@ -9,7 +9,7 @@ public interface GameManager {
      *
      * @return true if the race was started, false otherwise
      */
-    boolean startRace();
+    boolean race();
 
     /**
      * Stops the game.

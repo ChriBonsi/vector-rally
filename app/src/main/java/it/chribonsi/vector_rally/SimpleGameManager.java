@@ -31,8 +31,7 @@ public class SimpleGameManager implements GameManager {
     }
 
     @Override
-    public boolean startRace() {
-        System.out.println("Starting race with " + this.players.size() + " players on the track.");
+    public boolean race() {
         int turnCounter = 0;
         while (!this.isRaceFinished()) {
             turnCounter = this.printRaceStatus(turnCounter);
@@ -46,17 +45,15 @@ public class SimpleGameManager implements GameManager {
             if (!winners.isEmpty()) {
                 this.players.removeAll(winners);
             }
+            IOManager.printMap(this.racetrack.getGrid(), this.racetrack.getRacePositions());
+            System.out.println("\n");
         }
         return this.isRaceFinished();
     }
 
     private int printRaceStatus(int counter) {
         counter++;
-        System.out.println("\nTurn #" + counter);
-        for (Player player : this.players) {
-            System.out.println("Player " + player.getName() + " starts at position (" + this.racetrack.getRacePositions().get(player) + ")");
-        }
-        System.out.println("\n");
+        System.out.println("TURN #" + counter + "\n");
         return counter;
     }
 

@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Scanner;
 
 public class IOManager {
@@ -17,6 +18,25 @@ public class IOManager {
     //Constructor meant for testing
     public IOManager(InputStream inputStream) {
         this.scanner = new Scanner(inputStream);
+    }
+
+    public static void printMap(CellType[][] grid, Map<Player, Position> playersPositions) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                boolean isPlayer = false;
+                for (Map.Entry<Player, Position> entry : playersPositions.entrySet()) {
+                    if (entry.getValue().equals(Position.of(i, j))) {
+                        System.out.print(entry.getKey().getName().charAt(0));
+                        isPlayer = true;
+                        break;
+                    }
+                }
+                if (!isPlayer) {
+                    System.out.print(grid[i][j].toString());
+                }
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -33,6 +53,7 @@ public class IOManager {
                 System.out.println("Invalid path. Please enter a valid path ending with '.txt'.");
             }
         }
+        this.scanner.close();
         return path;
     }
 }

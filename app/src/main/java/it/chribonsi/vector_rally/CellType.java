@@ -22,4 +22,15 @@ public enum CellType {
             default -> throw new IllegalArgumentException("Unknown cell type: " + c);
         };
     }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case START -> "~";
+            case FINISH -> "#";
+            case ROAD -> "-";
+            case BORDER -> "/";
+            case OUTSIDE -> "@";
+        };
+    }
 }
