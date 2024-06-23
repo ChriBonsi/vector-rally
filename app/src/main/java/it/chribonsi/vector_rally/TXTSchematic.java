@@ -14,6 +14,7 @@ public class TXTSchematic implements Schematic {
     private final SimpleRacetrack track;
     private final List<String> trackLines = new ArrayList<>();
     private final List<Position> startingLine = new ArrayList<>();
+    private final List<Position> finishLine = new ArrayList<>();
 
     public TXTSchematic(Path filePath) {
         this.filePath = filePath;
@@ -34,14 +35,54 @@ public class TXTSchematic implements Schematic {
                 }
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred while reading the file: " + e.getMessage());
         }
     }
 
     @Override
     public boolean checkValidity() {
-        //TODO
-        return true;
+        boolean isValid = !players.isEmpty() && gridCheck();
+        if (!isValid) {
+            System.out.println("Validation failed: Players list is empty or grid checks failed.");
+        }
+        return isValid;
+    }
+
+    private boolean gridCheck() {
+        boolean isValid = dimensionCheck() && linesCheck() && borderCheck();
+        if (!isValid) {
+            System.out.println("Grid check failed: one or more grid validation conditions are not met.");
+        }
+        return isValid;
+    }
+
+    private boolean borderCheck() {
+        boolean isFirstRowValid = this.trackLines.getFirst().chars().allMatch(c -> c == '/' || c == '@');
+        boolean isLastRowValid = this.trackLines.getLast().chars().allMatch(c -> c == '/' || c == '@');
+
+        boolean isFirstAndLastCharsValid = this.trackLines.stream().allMatch(line -> (line.charAt(0) == '/' || line.charAt(0) == '@') && (line.charAt(line.length() - 1) == '/' || line.charAt(line.length() - 1) == '@'));
+
+        boolean isValid = isFirstRowValid && isLastRowValid && isFirstAndLastCharsValid;
+        if (!isValid) {
+            System.out.println("Border check failed: Borders do not meet required conditions.");
+        }
+        return isValid;
+    }
+
+    private boolean linesCheck() {
+        boolean isValid = this.startingLine.size() >= 4 && this.finishLine.size() >= 2;
+        if (!isValid) {
+            System.out.println("Lines check failed: Starting line or finish line does not meet the required size.");
+        }
+        return isValid;
+    }
+
+    private boolean dimensionCheck() {
+        boolean isValid = this.trackLines.stream().allMatch(line -> line.length() == this.trackLines.getFirst().length() && line.length() > 10);
+        if (!isValid) {
+            System.out.println("Dimension check failed: One or more lines do not meet the required length or minimum size.");
+        }
+        return isValid;
     }
 
     private void processTrackLine(String line, List<String> trackLines) {
@@ -68,7 +109,7 @@ public class TXTSchematic implements Schematic {
 
     @Override
     public CellType[][] deriveGrid() {
-        if (this.trackLines.isEmpty() || !this.checkValidity()) {
+        if (this.trackLines.isEmpty()) {
             return null;
         }
 
@@ -82,6 +123,8 @@ public class TXTSchematic implements Schematic {
                 grid[i][j] = CellType.fromChar(line.charAt(j));
                 if (grid[i][j] == CellType.START) {
                     startingLine.add(Position.of(i, j));
+                } else if (grid[i][j] == CellType.FINISH) {
+                    finishLine.add(Position.of(i, j));
                 }
             }
         }
