@@ -11,7 +11,7 @@ class CellTypeTest {
     void testFromChar() {
         assertEquals(CellType.ROAD, CellType.fromChar('-'));
         assertEquals(CellType.OUTSIDE, CellType.fromChar('@'));
-        assertEquals(CellType.BORDER, CellType.fromChar('/'));
+        assertEquals(CellType.WALL, CellType.fromChar('/'));
         assertEquals(CellType.START, CellType.fromChar('~'));
         assertThrows(IllegalArgumentException.class, () -> CellType.fromChar('x'));
     }

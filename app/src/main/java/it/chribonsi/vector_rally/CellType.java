@@ -5,18 +5,17 @@ package it.chribonsi.vector_rally;
  * START: the cells of the starting line
  * FINISH: the cells of the finish line
  * ROAD: the cells of the road (inside the borders)
- * BORDER: the cells of the borderlines
- * OBSTACLE: the cells of the obstacles (oil spills)
+ * WALL: the cells of the borderlines
  * OUTSIDE: the cells outside the racetrack
  */
 public enum CellType {
-    START, FINISH, ROAD, BORDER, OUTSIDE;
+    START, FINISH, ROAD, WALL, OUTSIDE;
 
     public static CellType fromChar(char c) {
         return switch (c) {
             case '-' -> ROAD;
             case '@' -> OUTSIDE;
-            case '/' -> BORDER;
+            case '/' -> WALL;
             case '~' -> START;
             case '#' -> FINISH;
             default -> throw new IllegalArgumentException("Unknown cell type: " + c);
@@ -29,7 +28,7 @@ public enum CellType {
             case START -> "~";
             case FINISH -> "#";
             case ROAD -> "-";
-            case BORDER -> "/";
+            case WALL -> "/";
             case OUTSIDE -> "@";
         };
     }

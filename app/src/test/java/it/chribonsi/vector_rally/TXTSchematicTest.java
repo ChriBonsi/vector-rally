@@ -41,7 +41,7 @@ class TXTSchematicTest {
         assertNotNull(grid);
         assertEquals(CellType.OUTSIDE, grid[0][0]);
         assertEquals(CellType.ROAD, grid[2][10]);
-        assertEquals(CellType.BORDER, grid[2][9]);
+        assertEquals(CellType.WALL, grid[2][9]);
         assertEquals(CellType.START, grid[16][10]);
     }
 

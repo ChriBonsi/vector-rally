@@ -11,4 +11,3 @@ public class EasyBotPlayer extends BotPlayer {
         return Movement.getRandomMovement(Movement.VALUES);
     }
 }
-
