@@ -2,7 +2,7 @@ package it.chribonsi.vector_rally;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +10,7 @@ public class SimpleGameManager implements GameManager {
     private final List<Player> players;
     private final SimpleRacetrack racetrack;
     private final IOManager ioManager;
-    private final HashMap<Player, Integer> leaderboard = new HashMap<>();
+    private final LinkedHashMap<Player, Integer> leaderboard = new LinkedHashMap<>();
 
     public SimpleGameManager() {
         this.ioManager = new IOManager();

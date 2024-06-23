@@ -176,4 +176,8 @@ public class SimpleRacetrack implements Racetrack {
     public Vector getLastMove(Player player) {
         return this.lastMovements.get(player);
     }
+
+    public Position getCurrentPosition(Player player) {
+        return this.racePositions.get(player);
+    }
 }

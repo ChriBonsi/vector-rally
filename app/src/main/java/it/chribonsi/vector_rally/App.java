@@ -5,8 +5,6 @@ package it.chribonsi.vector_rally;
 
 import java.util.Map;
 
-// C:/Users/chri9/Desktop/oval.txt
-
 public class App {
     public static void main(String[] args) {
         /*
