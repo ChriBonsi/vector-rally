@@ -53,7 +53,10 @@ public class IOManager {
                 System.out.println("Invalid path. Please enter a valid path ending with '.txt'.");
             }
         }
-        this.scanner.close();
         return path;
+    }
+
+    public void close() {
+        scanner.close();
     }
 }

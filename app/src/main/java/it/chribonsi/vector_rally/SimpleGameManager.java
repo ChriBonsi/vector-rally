@@ -18,6 +18,7 @@ public class SimpleGameManager implements GameManager {
         do {
             gameSchema = new TXTSchematic(this.ioManager.selectSchemaFilePath());
         } while (!gameSchema.checkValidity());
+        this.ioManager.close();
         this.players = gameSchema.getPlayers();
         this.racetrack = gameSchema.getTrack();
     }
