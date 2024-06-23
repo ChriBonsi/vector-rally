@@ -18,8 +18,8 @@ class TXTSchematicTest {
 
         schematic.getPlayers().forEach(player -> {
             assertNotNull(player);
-            assertTrue(player instanceof EasyBotPlayer || player instanceof MediumBotPlayer ||
-                    player instanceof HardBotPlayer || player instanceof HumanPlayer);
+            assertTrue(player instanceof EasyBotPlayer || player instanceof MediumBotPlayer
+                    || player instanceof HumanPlayer);
         });
 
         assertNotNull(schematic.getGrid());
@@ -48,7 +48,8 @@ class TXTSchematicTest {
         assertEquals(CellType.OUTSIDE, grid[0][0]);
         assertEquals(CellType.ROAD, grid[2][10]);
         assertEquals(CellType.WALL, grid[2][9]);
-        assertEquals(CellType.START, grid[16][10]);
+        assertEquals(CellType.START, grid[14][10]);
+        assertEquals(CellType.FINISH, grid[18][8]);
     }
 
     @Test
